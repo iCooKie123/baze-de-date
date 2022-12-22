@@ -100,7 +100,7 @@ show grants for "constantin"@"localhost";
 7) ca admin, visualizati toti utilizatorii din sistemul dvs pentru a vedea si utilizatorul nou creat
 
 use mysql;
-describe user;
+select User from user;
 
 8) retrageti toate privilegiile acordate utilizatorului nou creat, verificati ca nu mai are drepturi conectandu-va pe contul lui.
 
