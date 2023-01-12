@@ -1,0 +1,151 @@
+
+drop database if exists lib4;
+create database lib4;
+use lib4;
+
+
+drop table if exists clienti;
+CREATE TABLE clienti(
+ id_client int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  nume VARCHAR(20) NOT NULL, 
+  oras VARCHAR(20),  
+  telefon  CHAR(13), 
+  data_inreg DATE
+);
+
+insert into clienti(nume, oras,telefon, data_inreg) values
+('ION','ARAD','1212','2014-10-14'),
+('DAN','BUCURESTI','3333','2015-11-15'),
+('ANA','SIBIU','4444','2016-12-16'),
+('MARIA','GIURGIU','5555','2017-10-14'),
+('DANA','GALATI','6666','2018-11-15'),
+('LIA','SUCEAVA','7777','2018-12-16')
+;
+
+insert into clienti(nume, oras,telefon, data_inreg) values
+('IONEL','ARAD','1212','2014-10-14'),
+('DANIELA','BUCURESTI','3333','2015-11-15'),
+('ANAMARIA','SIBIU','4444','2016-12-16'),
+('MARIANA','GIURGIU','5555','2017-10-14'),
+('DAVID','GALATI','6666','2018-11-15'),
+('LIANA','SUCEAVA','7777','2018-12-16')
+;
+
+
+insert into clienti(nume, oras,telefon, data_inreg) values
+('IONUT','ARAD','1212','2014-10-14'),
+('DANUT','BUCURESTI','3333','2015-11-15'),
+('ANI','SIBIU','4444','2016-12-16'),
+('MARI','GIURGIU','5555','2017-10-14'),
+('DANA','GALATI','6666','2018-11-15'),
+('LILIANA','SUCEAVA','7777','2018-12-16')
+;
+
+drop table if exists comenzi ;
+CREATE TABLE comenzi (
+  id_comanda int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ id_client int unsigned NOT NULL, 
+  valoare double DEFAULT  0.0,
+  data   Date , 
+ FOREIGN KEY (id_client)    
+    REFERENCES clienti (id_client)
+  ON UPDATE CASCADE  ON DELETE CASCADE    
+);
+
+
+
+
+drop table if exists carti ;
+CREATE TABLE carti(
+  id_carte char(13) NOT NULL PRIMARY KEY,
+  titlu VARCHAR(20), 
+  autor VARCHAR(20),  
+  pret  double not null
+) ;
+
+
+insert into carti(ID_CARTE,TITLU,AUTOR,PRET) values
+('1234','MATEMATICA','IONESCU',1.0),
+('1235','INFORMATICA','VASILESCU',2.0),
+('1236','FIZICA','DANESCU',3.0),
+('1237','GEOGRAFIE','ENESCU',4.0),
+('1238','ENGLEZA','GEORGESCU',5.0),
+('1239','ISTORIE','ILIESCU',6.0)
+;
+
+
+
+
+
+drop table  if exists carti_comandate ;
+CREATE TABLE carti_comandate (
+  id_comanda int unsigned NOT NULL,
+  id_carte char(13)  NOT NULL, 
+  cantitate int NOT NULL DEFAULT 0,
+  primary key(id_comanda, id_carte),
+ FOREIGN KEY (id_carte)    
+    REFERENCES carti (id_carte)
+ ON UPDATE CASCADE  ON DELETE CASCADE ,
+ FOREIGN KEY (id_comanda)    
+    REFERENCES comenzi (id_comanda)
+ ON UPDATE CASCADE  ON DELETE CASCADE 
+); 
+
+
+
+DELIMITER //
+CREATE TRIGGER adauga_data BEFORE  INSERT  ON comenzi
+ FOR EACH ROW
+ BEGIN
+   IF(new.data is null)
+   THEN 
+   SET NEW.data=curdate(); 
+   END IF;
+ END;
+//
+DELIMITER ;
+
+
+
+
+
+
+
+insert into comenzi(id_client,valoare) values(1,10.0);
+insert into comenzi(id_client,valoare) values(1,4.0);
+insert into comenzi(id_client,valoare) values(2,13.0);
+insert into comenzi(id_client,valoare) values(3,6.0);
+
+
+
+
+insert into carti_comandate values(1,'1234',2);
+insert into carti_comandate values(1,'1235',1);
+insert into carti_comandate values(1,'1236',2);
+insert into carti_comandate values(2,'1234',2);
+insert into carti_comandate values(2,'1235',1);
+insert into carti_comandate values(3,'1235',2);
+insert into carti_comandate values(3,'1236',3);
+insert into carti_comandate values(4,'1236',2);
+
+
+
+
+#aici vom crea un utilizator numit webuser cu care PhP se va conecta la mysql
+#acest utilizator are drepturi de lucru numai in baza lib4.
+
+create user if not exists 'webuser'@'localhost' identified by 'webuser';
+grant select, insert, delete, update, create, drop, alter on lib4.* to 'webuser'@'localhost';
+flush privileges;
+
+
+
+
+
+
+
+
+
+
+
+

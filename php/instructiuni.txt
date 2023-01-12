@@ -1,0 +1,75 @@
+
+
+1) instalati XAMPP
+
+2) deschideti XAMPP control panel (Mypropgrams/XAMPP/Xampp control panel
+
+3) porniti ambele servere, html si mysql  (apasati butonul start)
+
+4)  deschideti un shell mysql (iconita neagra din dreapta in control panel)
+
+5) va conectati la platforma ca admin 
+
+6) 
+
+7) copy/paste la tot continutul fisierului lib4.txt  din arhiva trimisa.
+veti construi baza lib4 si userul webuser care sunt necesari pt teste   
+
+
+
+8) puneti toate fisierele din arhiva trimisa in directorul
+
+C:/xampp/htdocs
+
+acest director poate fi accesat direct din My programs/Xampp/Xampp htdocs 
+
+9) deschideti un browser (de preferat firefox)
+
+si apoi incepeti sa rulati exemplele(cititi mai jos)
+
+10) Testul de inserare clienti.
+fisiere utilizate: inserare.html, inserare.php
+
+pt teste tipariti la adresa url in browser: 
+
+localhost/inserare.thml 
+
+11) Testul de cautare clienti
+
+fisiere utilizate: cautare.html, cautare.php
+
+pt teste tipariti la adresa url in browser: 
+
+localhost/cautare.html
+
+
+12) testul de stergere clienti. in prealabil acesti clienti vor fi cautati si afisati intr-un scroll down list
+
+fisiere utilizate: cautare_pt_stergere.html, cautare_pt_stergere.php, stergere_din_scroll_down_list.php
+
+pt teste
+
+localhost/cautare_pt_stergere.html
+
+13) testul de stergere clienti. in prealabil acesti clienti vor fi cautati si afisati intr-un checkbox list
+
+fisiere utilizate: cautare_pt_stergere_checkbox.html, cautare_pt_stergere_checkbox.php, stergere_din_checkbox_list.php
+
+pt teste
+
+localhost/cautare_pt_stergere_checkbox.html
+
+
+14) testul pt updatare clienti. in prealabil clientul va fi cautat, selectat dintr-o lista folosind radio button iar apoi datele lui voor fi updatate.
+
+fisiere utilizate: cautare_pt_updatare.html, cautare_pt_updatare.php, updatare.php
+
+pt teste
+
+localhost/cautare_updatare.html
+
+
+
+
+
+
